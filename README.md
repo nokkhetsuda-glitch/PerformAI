@@ -4,7 +4,7 @@
 
 เนื้อหาในหน้านี้ถูกโอนย้ายมาจากการสนทนาบน Claude Cowork (ดูรายละเอียดเต็มใน [`CLAUDE.md`](./CLAUDE.md))
 
-> ดูหน้า index แบบมีดีไซน์ (สไตล์เดียวกับ Dashboard นำเสนอโครงการ) ได้ที่ [`index.html`](./index.html)
+> หน้าหลักของ repository คือ [`index.html`](./index.html) — Dashboard นำเสนอโครงการต่อกรรมการ (2 Tab: Idea/Framework และ Mock-up รายบุคคล)
 
 ## Index
 
