@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>PerformAI — Repository Index</title>
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --surface-page:   #f5f7fa;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --grid:           #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --series-1:       #2a78d6; /* standard / on-role blue */
+    --series-2:       #eb6834; /* off-role orange */
+    --series-3:       #1baf7a; /* actual / green */
+    --seq-100:        #cde2fb;
+    --seq-450:        #2a78d6;
+    --navy:           #3a5a85;
+    --navy-2:         #46709e;
+    --status-good:      #0ca30c;
+    --status-warning:   #fab219;
+    --status-serious:   #ec835a;
+    --status-critical:  #d03b3b;
+    --blue-tint:      #eaf2ff;
+    --green-tint:     #eaf8f1;
+    --orange-tint:    #fdece3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--surface-page);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--text-primary);
+  }
+  .page { max-width: 1080px; margin: 0 auto; padding: 24px 24px 60px; }
+
+  /* Top bar (reused from dashboard) */
+  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark {
+    width: 34px; height: 34px; border-radius: 9px; background: var(--navy);
+    display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 14px;
+  }
+  .brand-name { font-size: 19px; font-weight: 700; margin: 0; }
+  .brand-sub { font-size: 13.5px; color: var(--text-muted); margin: 0; }
+  .repo-link {
+    font-size: 14.5px; font-weight: 700; color: var(--seq-450); text-decoration: none;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 999px; padding: 8px 16px;
+  }
+  .repo-link:hover { text-decoration: underline; }
+
+  /* Title card */
+  .title-card {
+    background: var(--navy); color: #fff; border-radius: 14px; padding: 26px 28px; margin-bottom: 16px;
+  }
+  .title-card .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #cfe0f5; margin: 0 0 8px; }
+  .title-card h1 { font-size: 30px; margin: 0 0 12px; line-height: 1.35; }
+  .title-card p { font-size: 16px; color: #e4ecf8; margin: 0; max-width: 760px; line-height: 1.65; }
+
+  .section-title { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--text-secondary); margin: 30px 0 14px; }
+  .section-title .num { display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:var(--navy); color:#fff; font-size:13px; margin-right:9px; }
+
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; }
+
+  /* Index grid of file cards */
+  .index-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .index-card {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .index-card .icon-badge {
+    width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; margin-bottom: 2px;
+  }
+  .index-card.knowledge .icon-badge { background: var(--blue-tint); }
+  .index-card.script .icon-badge { background: var(--green-tint); }
+  .index-card.deliverable .icon-badge { background: var(--orange-tint); }
+  .index-card h4 { margin: 0; font-size: 16px; font-weight: 700; font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; }
+  .index-card p { margin: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.6; flex-grow: 1; }
+  .index-card a.open-link { font-size: 13.5px; font-weight: 700; color: var(--seq-450); text-decoration: none; margin-top: 4px; }
+  .index-card a.open-link:hover { text-decoration: underline; }
+
+  /* Getting started */
+  .steps-list { margin: 0; padding-left: 22px; font-size: 15px; color: var(--text-secondary); line-height: 1.9; }
+  .steps-list b { color: var(--text-primary); }
+
+  /* Status / next steps */
+  .value-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .value-card { border-radius: 12px; padding: 18px 20px; border: 1px solid var(--border); }
+  .value-card.done { background: var(--green-tint); }
+  .value-card.next { background: var(--blue-tint); }
+  .value-card h4 { font-size: 17px; margin: 0 0 14px; }
+  .value-card.done h4 { color: #0b6b3f; }
+  .value-card.next h4 { color: #124a91; }
+  .value-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .value-list li { background: #fff; border-radius: 8px; padding: 12px 14px; font-size: 14.5px; color: var(--text-primary); line-height: 1.55; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+
+  .footnote { font-size: 13px; color: var(--text-muted); margin-top: 26px; line-height: 1.65; }
+
+  @media (max-width: 700px) {
+    .index-grid, .value-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="viz-root">
+  <div class="page">
+
+    <div class="top-bar">
+      <div class="brand">
+        <div class="brand-mark">AI</div>
+        <div>
+          <p class="brand-name">PerformAI — Repository Index</p>
+          <p class="brand-sub">ระบบประเมินผลงานรายบุคคลด้วย Data-Driven AI · HR Analytics</p>
+        </div>
+      </div>
+      <a class="repo-link" href="https://github.com/nokkhetsuda-glitch/PerformAI">GitHub Repository ↗</a>
+    </div>
+
+    <div class="title-card">
+      <p class="eyebrow">โครงการ</p>
+      <h1>PerformAI — ระบบประเมินผลงานรายบุคคลด้วย Data-Driven AI</h1>
+      <p>เชื่อมโยงข้อมูล <b>Standard</b> (Job Role / KPI / Job Evaluation) กับ <b>Actual</b> (Timesheet / Jira / Daily Activities) แล้วให้ AI วิเคราะห์และเปรียบเทียบ เพื่อให้หัวหน้างานมีข้อมูลประกอบการประเมินผลที่อิงข้อเท็จจริง สำหรับบริษัท PDE ในเครือ Precise Digital Economy — เนื้อหาในหน้านี้ถูกโอนย้ายมาจากการสนทนาบน Claude Cowork</p>
+    </div>
+
+    <div class="section-title"><span class="num">1</span>Index — ไฟล์ทั้งหมดในโครงการ</div>
+    <div class="index-grid">
+      <div class="index-card knowledge">
+        <div class="icon-badge">📘</div>
+        <h4>CLAUDE.md</h4>
+        <p>Knowledge base ฉบับเต็ม — ภาพรวมโครงการ, Framework, แหล่งข้อมูล, การตัดสินใจสำคัญ, Design System, สิ่งที่ยังไม่ได้ทำ</p>
+        <a class="open-link" href="./CLAUDE.md">เปิดไฟล์ →</a>
+      </div>
+      <div class="index-card script">
+        <div class="icon-badge">🐍</div>
+        <h4>scripts/parse_timesheet.py</h4>
+        <p>Parser ไฟล์ Timesheet PDE รูปแบบ nested (<code>.xls</code>) — แยกแถวหัวพนักงานกับแถวรายละเอียดออกจากกัน</p>
+        <a class="open-link" href="./scripts/parse_timesheet.py">เปิดไฟล์ →</a>
+      </div>
+      <div class="index-card script">
+        <div class="icon-badge">🐍</div>
+        <h4>scripts/build_analysis.py</h4>
+        <p>รวม/สรุปข้อมูล Timesheet + join กับ Master/Mapping (เวอร์ชันเก่า ดู logic ล่าสุดใน generate_xlsx.py)</p>
+        <a class="open-link" href="./scripts/build_analysis.py">เปิดไฟล์ →</a>
+      </div>
+      <div class="index-card script">
+        <div class="icon-badge">🐍</div>
+        <h4>scripts/generate_xlsx.py</h4>
+        <p>สร้างรายงาน Excel วิเคราะห์ข้อมูลพนักงาน (PDE_วิเคราะห์ข้อมูลพนักงาน.xlsx) ด้วย openpyxl — logic การ join ที่ถูกต้องล่าสุด</p>
+        <a class="open-link" href="./scripts/generate_xlsx.py">เปิดไฟล์ →</a>
+      </div>
+      <div class="index-card deliverable">
+        <div class="icon-badge">📊</div>
+        <h4>deliverables/performai-presentation-dashboard.html</h4>
+        <p>Dashboard นำเสนอโครงการต่อกรรมการ 2 Tab: Idea/Framework/Platform Flow และ Mock-up ตัวอย่างรายบุคคล (นาย A)</p>
+        <a class="open-link" href="./deliverables/performai-presentation-dashboard.html">เปิดไฟล์ →</a>
+      </div>
+    </div>
+
+    <div class="section-title"><span class="num">2</span>เริ่มต้นใช้งาน</div>
+    <div class="card">
+      <ol class="steps-list">
+        <li>อ่าน <b>CLAUDE.md</b> ก่อนเสมอ — มีบริบท การตัดสินใจสำคัญ และข้อควรระวังของข้อมูลที่ต้องรู้ก่อนทำงานต่อ</li>
+        <li>สคริปต์ใน <b>scripts/</b> ต้องใช้กับไฟล์ข้อมูลต้นทาง (<code>Perform AI Team/...</code>) ที่อยู่บนเครื่องผู้ใช้ ไม่ได้รวมอยู่ใน repo นี้ — ดูโครงสร้างที่ต้องใช้ใน CLAUDE.md</li>
+        <li>ไฟล์ <b>deliverables/</b> อื่น ๆ ที่กล่าวถึงใน CLAUDE.md (เอกสารเสนอโครงการ, ไฟล์ Excel วิเคราะห์ข้อมูล, dashboard-mockup.html, team-roster-mockup.html) ยังไม่ได้โอนย้ายมาไว้ใน repo นี้ — อัปโหลดเพิ่มเติมภายหลังได้เมื่อพร้อม</li>
+      </ol>
+    </div>
+
+    <div class="section-title"><span class="num">3</span>สถานะ / ขั้นตอนถัดไป</div>
+    <div class="value-row">
+      <div class="value-card done">
+        <h4>สิ่งที่ทำแล้ว</h4>
+        <ul class="value-list">
+          <li>Parser Timesheet PDE ทดสอบแล้วว่าอ่านได้ครบ 42 คนตรงกับ Master</li>
+          <li>Join Master ↔ Job Role Mapping ผ่าน Job Role Code พร้อม flag conflict</li>
+          <li>สคริปต์สร้างรายงาน Excel วิเคราะห์ข้อมูลพนักงาน (สูตร SUMIFS/INDEX-MATCH ไม่ hardcode)</li>
+          <li>Dashboard นำเสนอโครงการต่อกรรมการ (2 Tab) พร้อม Design System กำหนดชัดเจน</li>
+        </ul>
+      </div>
+      <div class="value-card next">
+        <h4>ขั้นตอนถัดไป</h4>
+        <ul class="value-list">
+          <li>เลือกหน่วยงานนำร่อง Phase 1 (แนะนำ Software Development and System Integration Team)</li>
+          <li>แทนที่ Activity classification แบบ keyword rule ด้วย AI classification จริง</li>
+          <li>ยืนยัน Job Role Code ที่มีผลแมสขัดแย้งกัน และปิด Gap พนักงาน 45% ที่ยังไม่มี Job Code รองรับ</li>
+          <li>เชื่อม interaction จริงในทุก Dashboard mock-up และออกแบบ Skill Taxonomy สำหรับ Phase 3</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footnote">หน้านี้เป็น index ของ repository ออกแบบด้วย Design System เดียวกับ <code>performai-presentation-dashboard.html</code> (สี navy <code>#3a5a85</code>, categorical blue/orange/green) เพื่อให้ภาพรวมโครงการและ Dashboard มีความต่อเนื่องกันเมื่อเปิดดูบน GitHub — ดูรายละเอียดโครงการฉบับเต็มได้ใน <a href="./CLAUDE.md">CLAUDE.md</a></p>
+
+  </div>
+</div>
+</body>
+</html>
