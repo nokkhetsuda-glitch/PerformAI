@@ -111,6 +111,11 @@
     width: 100%; background: #fff; border-radius: 8px; padding: 12px 14px; font-size: 16px; font-weight: 700;
     margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
   }
+  .fw-tools-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); margin: 2px 0 8px; }
+  .fw-mini-card.tool {
+    width: calc(100% - 16px); margin-left: 16px; font-size: 14px; font-weight: 600; padding: 9px 12px;
+    background: rgba(255,255,255,0.7); box-shadow: none; border: 1px dashed var(--baseline);
+  }
   .fw-col.core .fw-core-title { font-size: 24px; font-weight: 800; margin: 8px 0 3px; }
   .fw-col.core .fw-core-sub { font-size: 14.5px; color: #dbe6f6; margin: 0 0 16px; }
   .fw-core-pill { font-size: 13px; font-weight: 700; letter-spacing: .04em; color: #a9ede2; margin-bottom: 16px; }
@@ -290,10 +295,11 @@
           </div>
           <div class="fw-col actual">
             <p class="fw-col-title">ACTUAL</p>
-            <p class="fw-col-sub">What Employees Do</p>
-            <div class="fw-mini-card">Timesheet</div>
-            <div class="fw-mini-card">Jira</div>
-            <div class="fw-mini-card">Daily Activities</div>
+            <p class="fw-col-sub">What Employee Do = Daily Report</p>
+            <div class="fw-mini-card">Daily Report</div>
+            <p class="fw-tools-label">เครื่องมือที่ใช้บันทึก Daily Report</p>
+            <div class="fw-mini-card tool">Timesheet</div>
+            <div class="fw-mini-card tool">Jira</div>
           </div>
         </div>
         <div class="fw-bottom-row">
