@@ -538,14 +538,14 @@
           <div class="cmp-block">
             <div class="cmp-head">
               <p class="cmp-title">JE vs PE</p>
-              <span class="cmp-value warning">ต่ำกว่ามาตรฐาน 19 คะแนน</span>
+              <span class="cmp-value good">ใกล้เคียงมาตรฐาน (-4)</span>
             </div>
             <div class="je-compare-row">
               <div class="je-compare-item"><p class="jv-label">JE (Standard)</p><p class="jv-val">57</p></div>
               <div class="je-compare-arrow">↔</div>
-              <div class="je-compare-item"><p class="jv-label">PE (Actual)</p><p class="jv-val">38</p></div>
+              <div class="je-compare-item"><p class="jv-label">PE (Actual)</p><p class="jv-val">53</p></div>
             </div>
-            <p class="cmp-note" style="margin-top:8px;">PE ≈ JE × ค่าเฉลี่ย (Performance vs KPI 50% + Role Alignment 84%) = 57 × 67% ≈ 38 — เป็นตัวเลขประมาณจากการให้คะแนนเชิงคุณภาพของ AI ไม่ใช่แบบประเมินสมรรถนะที่เป็นทางการ ส่วนต่างที่พบส่วนหนึ่งอาจมาจากข้อจำกัดของ Timesheet ที่ไม่ได้แยกบันทึกงาน Testing/Documentation ไม่ใช่ว่าไม่ได้ทำจริง ควรให้หัวหน้างานยืนยันอีกครั้ง</p>
+            <p class="cmp-note" style="margin-top:8px;">PE = 53 คำนวณจากเกณฑ์ประเมินค่างาน Job Evaluation ทางการ 30 ข้อ (ชุดเดียวกับที่ใช้กำหนด JE=57) โดย AI ให้คะแนนแต่ละข้อจากลักษณะงานจริงใน Daily Report (เช่น ความซับซ้อนงาน Customize/Migrate ข้อมูล, การประสานงาน Vendor, ไม่มีผู้ใต้บังคับบัญชา ฯลฯ) ส่วนต่าง 4 คะแนนอยู่ในเกณฑ์ปกติ ไม่มีนัยสำคัญ — เป็นการประเมินโดย AI ยังไม่ใช่แบบประเมินที่เป็นทางการ ควรให้หัวหน้างานยืนยันอีกครั้ง</p>
           </div>
         </div>
 
@@ -618,7 +618,7 @@
         </div>
       </div>
 
-      <p class="footnote">"นาย กกก ใจดี" เป็นนามสมมติเพื่อความเป็นส่วนตัวของพนักงาน ส่วนข้อมูล Job Role, JE และ Timesheet เป็นข้อมูลจริง (ฝ่าย DBA Project Team) จาก JD/Job Role Database และ Timesheet จริง 7 เดือน (ม.ค.–ส.ค. 2569 ไม่รวมมิ.ย. เนื่องจากไฟล์ข้อมูลซ้ำกับ ก.ค.) ส่วน Performance vs KPI และ JE vs PE เป็นการอ่านเชิงคุณภาพจากเนื้อหางานจริงโดย AI ยังไม่ใช่แบบประเมินผลที่เป็นทางการ ควรให้หัวหน้างานยืนยันอีกครั้ง</p>
+      <p class="footnote">"นาย กกก ใจดี" เป็นนามสมมติเพื่อความเป็นส่วนตัวของพนักงาน ส่วนข้อมูล Job Role, JE และ Timesheet เป็นข้อมูลจริง (ฝ่าย DBA Project Team) จาก JD/Job Role Database และ Timesheet จริง 7 เดือน (ม.ค.–ส.ค. 2569 ไม่รวมมิ.ย. เนื่องจากไฟล์ข้อมูลซ้ำกับ ก.ค.) ส่วน Performance vs KPI เป็นการอ่านเชิงคุณภาพจากเนื้อหางานจริงโดย AI และ JE vs PE คำนวณจากเกณฑ์ประเมินค่างาน Job Evaluation ทางการ 30 ข้อ ทั้งสองส่วนยังไม่ใช่แบบประเมินผลที่เป็นทางการ ควรให้หัวหน้างานยืนยันอีกครั้ง</p>
     </div>
 
     <p class="footnote" style="margin-top:30px;">Tab 1 และ Tab 2 จัดทำเพื่อสาธิตแนวคิดการนำเสนอโครงการ PerformAI (ข้อมูลตัวอย่างประกอบ Framework) ส่วน Tab 3 แสดงผลจากข้อมูลจริงของพนักงาน 1 คน (JD, Job Role Database, Timesheet จริง) เพื่อทดลองใช้ Framework กับกรณีจริง</p>
