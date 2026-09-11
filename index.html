@@ -754,25 +754,13 @@
       frag.appendChild(val.nextElementSibling.cloneNode(true)); // .value-row
       return frag;
     },
-    function () { // 4: Individual Dashboard - JD
+    function () { // 4: Individual Dashboard - JD + AI Processing + Daily Report (combined)
       var frag = document.createDocumentFragment();
       frag.appendChild(document.querySelector('#tab3 .t2-head').cloneNode(true));
-      frag.appendChild(document.querySelectorAll('#tab3 .t2-col')[0].cloneNode(true));
+      frag.appendChild(document.querySelector('#tab3 .t2-cols').cloneNode(true));
       return frag;
     },
-    function () { // 5: Individual Dashboard - AI Processing & Comparison
-      var frag = document.createDocumentFragment();
-      frag.appendChild(document.querySelector('#tab3 .t2-head').cloneNode(true));
-      frag.appendChild(document.querySelectorAll('#tab3 .t2-col')[1].cloneNode(true));
-      return frag;
-    },
-    function () { // 6: Individual Dashboard - Daily Report
-      var frag = document.createDocumentFragment();
-      frag.appendChild(document.querySelector('#tab3 .t2-head').cloneNode(true));
-      frag.appendChild(document.querySelectorAll('#tab3 .t2-col')[2].cloneNode(true));
-      return frag;
-    },
-    function () { // 7: Individual Dashboard - Value from Performance
+    function () { // 5: Individual Dashboard - Value from Performance
       var frag = document.createDocumentFragment();
       frag.appendChild(document.querySelector('#tab3 .t2-head').cloneNode(true));
       var title4 = document.querySelector('#tab3 .section-title');
@@ -825,9 +813,7 @@
     });
     var wrap = document.getElementById('presentSlideWrap');
     wrap.scrollTop = 0;
-    var isDashboardSlide = n >= 4;
-    document.getElementById('presentHeader').style.display = isDashboardSlide ? 'none' : '';
-    var labels = ['Context', 'Framework', 'Value', 'Dashboard รายบุคคล · JD', 'Dashboard รายบุคคล · AI Processing', 'Dashboard รายบุคคล · Daily Report', 'Dashboard รายบุคคล · Value'];
+    var labels = ['Context', 'Framework', 'Value', 'Dashboard รายบุคคล · JD, AI Processing, Daily Report', 'Dashboard รายบุคคล · Value'];
     document.getElementById('presentPager').textContent = n + ' / ' + PRESENT_TOTAL + '  ·  ' + labels[n - 1];
   }
 
